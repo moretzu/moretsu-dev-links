@@ -14,9 +14,17 @@ app.url_map.strict_slashes = False
 
 @app.route("/")
 def index():
-    return render_template_string(
-        "<h1>hi, this is my sort of URL shortener pls go away :(</h1><a href=https://moretsu.dev>my main website</a>"
+    links_as_buttons = ""
+
+    for platform, url in LINKS.items():
+        links_as_buttons += f'<a role="button" href="{url}">{platform}</a><br/>'
+
+    template_string = "<h1>hi, this is my sort of URL shortener pls go away :(</h1><a href=https://moretsu.dev>my main website</a>"
+    template_string += (
+        f"<h3>links to my socials and other things</h3>{links_as_buttons}"
     )
+
+    return render_template_string(template_string)
 
 
 @app.route("/<platform>")
