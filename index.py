@@ -1,4 +1,4 @@
-from flask import Flask, redirect, abort
+from flask import Flask, redirect, abort, render_template_string
 
 LINKS = {
     "twitch": "https://www.twitch.tv/moretsuu",
@@ -14,7 +14,9 @@ app.url_map.strict_slashes = False
 
 @app.route("/")
 def index():
-    return ":>"
+    return render_template_string(
+        "<h1>hi, this is my sort of URL shortener pls go away :(</h1><a href=https://moretsu.dev>my main website</a>"
+    )
 
 
 @app.route("/<platform>")
